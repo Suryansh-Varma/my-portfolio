@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="relative h-screen overflow-hidden">
+      {/* Video background */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
         autoPlay
@@ -14,28 +15,28 @@ export default function Hero() {
         <source src="/devilfruits/bg1.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay for contrast */}
+      {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Decorative ship/hat */}
+      {/* Decorative ship */}
       <img
         src="/devilfruits/ship.png"
         alt="ship"
-        height={40}
-        width={56}
-        className="rounded-full absolute left-8 top-12 w-28 opacity-90 float-anim"
+        className="absolute left-8 top-12 w-28 opacity-90 rounded-full float-anim"
       />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        {/* Name */}
         <motion.h1
           initial={{ y: -40, opacity: 0, scale: 0.98 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           className="h-pirate text-6xl md:text-6xl text-yellow-300 drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]"
-        > 
-          SURYANSH VARMA K
+        >
+          SURYANSH D VARMA
         </motion.h1>
 
+        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -46,6 +47,7 @@ export default function Hero() {
           development and product strategy.
         </motion.p>
 
+        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,11 +62,19 @@ export default function Hero() {
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 border border-[#c77b00] rounded-md font-semibold hover:bg-[#c77b00]/80 transition"
+            className="text-white px-6 py-3 border border-[#c77b00] rounded-md font-semibold hover:bg-[#c77b00]/80 transition"
           >
             Send Message in Bottle
           </a>
         </motion.div>
+
+        {/* Quote */}
+        <h2
+          className="mt-12 text-2xl md:text-3xl text-yellow-400 drop-shadow-[0_5px_5px_rgba(0,0,0,0.9)] tracking-widest max-w-3xl"
+          style={{ fontFamily: "'Rampart One', cursive" }}
+        >
+          "If you don’t take risks, you can’t create a future!"
+        </h2>
       </div>
     </section>
   );

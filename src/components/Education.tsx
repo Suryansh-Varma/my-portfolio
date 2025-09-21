@@ -9,7 +9,7 @@ const education = [
   },
   {
     school: "RGUKT R.K. Valley",
-    degree: "PUC + IT Foundation",
+    degree: "PUC (MPC)",
     years: "2021 - 2023",
   },
   {
@@ -21,11 +21,13 @@ const education = [
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 bg-[#071022]">
+    <section id="education" className="py-20 bg-[#071022] relative">
       <div className="max-w-4xl mx-auto px-6">
-        <h2 className="h-pirate text-4xl text-yellow-300 text-center mb-8">Cadet Training</h2>
+        <h2 className="h-pirate text-4xl text-yellow-300 text-center mb-12 drop-shadow-[2px_2px_8px_rgba(0,0,0,0.8)]">
+          Cadet Training
+        </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {education.map((e, i) => (
             <motion.div
               key={e.school}
@@ -33,10 +35,17 @@ export default function Education() {
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="wanted p-6 rounded-md"
+              className="relative p-6 rounded-xl bg-[#fdf5e6]/90 border-4 border-[#5b3d1b]/70 shadow-[0_0_25px_rgba(0,0,0,0.6)]"
             >
-              <h3 className="text-2xl font-bold text-[#6b451a]">{e.school}</h3>
-              <p className="text-sm italic">{e.degree} • {e.years}</p>
+              {/* optional parchment texture overlay */}
+              <div className="absolute inset-0 bg-[url('/textures/parchment.png')] opacity-20 mix-blend-multiply rounded-xl pointer-events-none" />
+
+              <h3 className="relative text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)]">
+                {e.school}
+              </h3>
+              <p className="relative mt-2 text-[#2c1b0c] italic">
+                {e.degree} • {e.years}
+              </p>
             </motion.div>
           ))}
         </div>
