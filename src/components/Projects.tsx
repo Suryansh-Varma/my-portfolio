@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const projects = [
   { title: "Freshsense IoT", desc: "Smart fridge: expiry detection & recipes" },
-  { title: "TravelWise", desc: "A smart Travel Planner" },
+  { title: "TravelWise", desc: "A smart Travel Planner" ,  demo: "https://travelwise-app-a4qi.vercel.app/" , repo:"https://github.com/Suryansh-Varma/travelwise-app"},
   { title: "E-commerce Next App", desc: "Fullstack Next.js shop with MERN stack" },
 ];
 
@@ -36,11 +36,11 @@ export default function Projects() {
               </p>
 
               <div className="relative mt-6 flex gap-3">
-                <a className="px-4 py-2 bg-[#c77b00] text-white rounded-md font-medium shadow hover:scale-105 transition">
-                  Demo
+                <a className="px-4 py-2 bg-[#c77b00] text-white rounded-md font-medium shadow hover:scale-105 transition" href={p.demo} target="_blank" rel="noopener noreferrer">
+                  {p.demo ? 'Live Demo' : 'Coming Soon'}
                 </a>
-                <a className="px-4 py-2 border-2 border-[#c77b00] text-[#5b3d1b] bg-[#fff4e0]/60 rounded-md font-medium hover:bg-[#c77b00]/20 transition">
-                  Code
+                <a className="px-4 py-2 border-2 border-[#c77b00] text-[#5b3d1b] bg-[#fff4e0]/60 rounded-md font-medium hover:bg-[#c77b00]/20 transition" href={p.repo} target="_blank" rel="noopener noreferrer">
+                  {p.repo ? 'Source Code' : 'Private Repo'}
                 </a>
               </div>
             </motion.div>
