@@ -2,9 +2,10 @@
 import { motion } from "framer-motion";
 
 const projects = [
-  { title: "Freshsense IoT", desc: "Smart fridge: expiry detection & recipes" },
   { title: "TravelWise", desc: "A smart Travel Planner" ,  demo: "https://travelwise-app-a4qi.vercel.app/" , repo:"https://github.com/Suryansh-Varma/travelwise-app"},
   { title: "E-commerce Next App", desc: "Fullstack Next.js shop with MERN stack" },
+  {title: "Sheetflow", desc: "A Sheet automation tool for data management", demo: "https://sheetflow-kappa.vercel.app/", repo: "https://github.com/Suryansh-Varma/sheetflow"},
+  {title: "NiftySignal", desc: "A stock market prediction tool using Machine Learning", demo: "https://niftysignal.vercel.app/", repo: "https://github.com/Suryansh-Varma/niftysignal"}
 ];
 
 export default function Projects() {
