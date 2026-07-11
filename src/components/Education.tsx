@@ -21,9 +21,9 @@ const education = [
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 bg-[#071022] relative">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="h-pirate text-4xl text-yellow-300 text-center mb-12 drop-shadow-[2px_2px_8px_rgba(0,0,0,0.8)]">
+    <section id="education" className="py-24 bg-bg-secondary relative overflow-hidden">
+      <div className="max-w-4xl mx-auto px-6 z-10 relative">
+        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-16 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] tracking-widest">
           Cadet Training
         </h2>
 
@@ -31,20 +31,24 @@ export default function Education() {
           {education.map((e, i) => (
             <motion.div
               key={e.school}
-              initial={{ x: i % 2 === 0 ? -80 : 80, opacity: 0 }}
+              initial={{ x: i % 2 === 0 ? -50 : 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="relative p-6 rounded-xl bg-[#fdf5e6]/90 border-4 border-[#5b3d1b]/70 shadow-[0_0_25px_rgba(0,0,0,0.6)]"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              className="relative p-6 rounded-xl bg-[#fdf5e6] border-4 border-[#5b3d1b] shadow-2xl transition duration-300"
             >
-              {/* optional parchment texture overlay */}
-              <div className="absolute inset-0 bg-[url('/textures/parchment.png')] opacity-20 mix-blend-multiply rounded-xl pointer-events-none" />
+              {/* Parchment Overlay */}
+              <div className="absolute inset-0 bg-[url('/textures/parchment.png')] opacity-15 mix-blend-multiply rounded-lg pointer-events-none" />
 
-              <h3 className="relative text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)]">
+              <h3 
+                className="relative text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)]" 
+                style={{ fontFamily: "var(--font-cinzel), serif" }}
+              >
                 {e.school}
               </h3>
-              <p className="relative mt-2 text-[#2c1b0c] italic">
-                {e.degree} • {e.years}
+              <p className="relative mt-2 text-[#402b18] font-bold text-sm italic">
+                {e.degree} • <span className="text-[#b85a00]">{e.years}</span>
               </p>
             </motion.div>
           ))}
