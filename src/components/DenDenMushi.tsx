@@ -1,32 +1,58 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+
+// Module-level audio variables to persist between mounts/unmounts (e.g. when mobile header drawer toggles)
+let globalAudio: HTMLAudioElement | null = null;
+let isGlobalPlaying = false;
+const listeners = new Set<(playing: boolean) => void>();
+
+const getAudio = () => {
+  if (typeof window === "undefined") return null;
+  if (!globalAudio) {
+    globalAudio = new Audio("/audio/Tides_and_Timber.mp3");
+    globalAudio.loop = true;
+  }
+  return globalAudio;
+};
 
 export default function DenDenMushi() {
-  const audioRef =useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(isGlobalPlaying);
 
   useEffect(() => {
-    // Stream working waves loop from a fast, reliable, CORS-enabled Google Actions CDN
-    audioRef.current=new Audio("/audio/Tides_and_Timber.mp3");
-    audioRef.current.loop = true;
+    // Sync with current global state on mount
+    setIsPlaying(isGlobalPlaying);
+
+    const handleStateChange = (playing: boolean) => {
+      setIsPlaying(playing);
+    };
+    listeners.add(handleStateChange);
+
+    // Initialize audio on client mount
+    getAudio();
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
+      listeners.delete(handleStateChange);
+      // We do NOT pause the audio on unmount. This allows the audio to continue playing
+      // when the mobile drawer unmounts as it closes.
     };
   }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch((err) => {
+    const audio = getAudio();
+    if (!audio) return;
+
+    const nextPlaying = !isPlaying;
+    isGlobalPlaying = nextPlaying;
+
+    if (nextPlaying) {
+      audio.play().catch((err) => {
         console.warn("Audio play blocked by browser policy. Interact with the document first.", err);
       });
+    } else {
+      audio.pause();
     }
-    setIsPlaying(!isPlaying);
+
+    listeners.forEach((listener) => listener(nextPlaying));
   };
 
   return (

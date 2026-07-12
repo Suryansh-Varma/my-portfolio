@@ -9,7 +9,10 @@ interface RepoLink {
 
 interface ProjectItem {
   title: string;
+  subtitle: string;
   desc: string;
+  tech: string[];
+  bullets: string[];
   demo?: string;
   repo?: string;
   repos?: RepoLink[];
@@ -18,35 +21,57 @@ interface ProjectItem {
 
 const projects: ProjectItem[] = [
   { 
-    title: "TravelWise", 
-    desc: "A smart AI-driven travel planner designed to map out routes and optimize budgets.", 
-    demo: "https://travelwise-app-a4qi.vercel.app/", 
-    repo: "https://github.com/Suryansh-Varma/travelwise-app",
-    bounty: "800,000,000"
+    title: "SheetFlow",
+    subtitle: "Real-time Collaborative Spreadsheet",
+    desc: "A real-time collaborative spreadsheet supporting live multi-user editing with presence indicators and <100ms cell sync latency.",
+    tech: ["Next.js 14", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
+    bullets: [
+      "Built a real-time collaborative spreadsheet supporting live multi-user editing with presence indicators and <100ms cell sync latency using Supabase Realtime channels."
+    ],
+    demo: "https://sheetflow-kappa.vercel.app/", 
+    repo: "https://github.com/Suryansh-Varma/sheetflow",
+    bounty: "850,000,000"
   },
   { 
-    title: "E-commerce Next App", 
-    desc: "A full-stack, feature-rich Next.js shop powered by the MERN stack with secure payments.",
+    title: "Neighborhood Carpool coordination",
+    subtitle: "AWS Serverless Matching Service",
+    desc: "A full-stack carpool platform deploying matching logic on AWS Lambda and containerized services using Amazon ECR.",
+    tech: ["React", "Python (FastAPI)", "AWS Lambda", "Amazon ECR", "GitHub"],
+    bullets: [
+      "Built a full-stack carpool coordination platform in a 4-person team, enabling users to create, join, and manage carpool groups by location and destination, using a React frontend and FastAPI backend."
+    ],
+    demo: "http://35.153.45.221/",
+    repos: [
+      { label: "Frontend", url: "https://github.com/Rama-Krishna-Pidugu/community-carpool-connect" },
+      { label: "Backend", url: "https://github.com/Rama-Krishna-Pidugu/carpooling-backend" }
+    ],
+    bounty: "950,000,000"
+  },
+  { 
+    title: "Smart Commerce(TechHeaven)",
+    subtitle: "Full-Stack Enterprise E-Commerce Platform",
+    desc: "A production-style full-stack e-commerce platform featuring JWT authentication, role-based authorization, and Swagger docs.",
+    tech: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Next.js", "React", "TypeScript", "Docker", "Swagger"],
+    bullets: [
+      "Engineered a production-style full-stack e-commerce platform featuring JWT authentication, role-based authorization, product management, shopping cart, checkout, and order processing using Spring Boot and PostgreSQL."
+    ],
     demo: "https://techheaven.vercel.app/",
     repos: [
       { label: "Frontend", url: "https://github.com/Suryansh-Varma/tech-heaven-frontend" },
       { label: "Backend", url: "https://github.com/Suryansh-Varma/tech-heaven-backend" }
     ],
-    bounty: "650,000,000"
+    bounty: "750,000,000"
   },
   { 
-    title: "Sheetflow", 
-    desc: "An advanced spreadsheet automation tool for database and workflow management.", 
-    demo: "https://sheetflow-kappa.vercel.app/", 
-    repo: "https://github.com/Suryansh-Varma/sheetflow",
-    bounty: "550,000,000"
-  },
-  { 
-    title: "NiftySignal", 
-    desc: "A stock market prediction and signaling tool built using machine learning classifiers.", 
-    demo: "https://niftysignal.vercel.app/", 
+    title: "NiftySignal",
+    subtitle: "NSE Market Predictor & Dashboard",
+    desc: "An ML-driven financial forecasting tool predicting short-term market trends using LSTM and ensemble models on NSE historical data.",
+    tech: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "NSE API"],
+    bullets: [
+      "Built an ML-driven financial forecasting tool on NSE historical data using LSTM and ensemble models to predict short-term market trends with ~72% directional accuracy on test data.",],
+    demo: "https://niftysignal.onrender.com/docs", 
     repo: "https://github.com/Suryansh-Varma/niftysignal",
-    bounty: "450,000,000"
+    bounty: "650,000,000"
   }
 ];
 
@@ -54,11 +79,14 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 bg-bg-secondary relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-16 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] tracking-widest">
+        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] tracking-widest">
           Treasure Missions
         </h2>
+        <p className="text-center text-sm text-yellow-100/70 mb-16 uppercase tracking-wider font-semibold" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+          Featured Engineering Projects & Technical Architecture
+        </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((p, i) => (
             <motion.div
               key={p.title}
@@ -70,7 +98,7 @@ export default function Projects() {
                 y: -10, 
                 boxShadow: "0 25px 50px -12px rgba(251, 191, 36, 0.2)"
               }}
-              className="relative rounded-xl p-6 bg-[#fdf5e6] border-4 border-[#5b3d1b] flex flex-col justify-between min-h-[380px] overflow-hidden group shadow-xl"
+              className="relative rounded-xl p-8 bg-[#fdf5e6] border-4 border-[#5b3d1b] flex flex-col justify-between min-h-[480px] overflow-hidden group shadow-xl"
             >
               {/* Parchment Overlay */}
               <div className="absolute inset-0 pointer-events-none bg-[url('/textures/parchment.png')] opacity-15 mix-blend-multiply rounded-lg" />
@@ -95,15 +123,35 @@ export default function Projects() {
                 <h3 className="text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_1px_rgba(0,0,0,0.2)]" style={{ fontFamily: "var(--font-cinzel), serif" }}>
                   {p.title}
                 </h3>
+                <h4 className="text-xs font-bold text-[#b85a00] uppercase tracking-wider mt-1 mb-3">
+                  {p.subtitle}
+                </h4>
+
+                {/* Tech Stack badges */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {p.tech.map((t) => (
+                    <span 
+                      key={t}
+                      className="px-2 py-0.5 bg-[#5b3d1b]/10 border border-[#5b3d1b]/25 rounded text-[10px] font-bold text-[#5b3d1b]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
                 
-                <p className="mt-3 text-sm text-[#3c2a18] font-medium leading-relaxed">
-                  {p.desc}
-                </p>
+                {/* Bullet points */}
+                <ul className="mt-3 text-xs text-[#3c2a18] font-semibold leading-relaxed space-y-2 list-disc list-outside pl-4">
+                  {p.bullets.map((b, idx) => (
+                    <li key={idx} className="marker:text-[#c77b00]">
+                      {b}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div>
                 {/* Bounty at the bottom of card */}
-                <div className="mt-5 pt-3 border-t border-dashed border-[#5b3d1b]/40 flex flex-col items-center select-none">
+                <div className="mt-6 pt-3 border-t border-dashed border-[#5b3d1b]/40 flex flex-col items-center select-none">
                   <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#5b3d1b]/60">Bounty</span>
                   <span className="h-pirate text-lg text-[#b85a00] font-bold tracking-wider mt-0.5">
                     ฿ {p.bounty}-

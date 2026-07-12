@@ -23,9 +23,12 @@ export default function Education() {
   return (
     <section id="education" className="py-24 bg-bg-secondary relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-16 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] tracking-widest">
+        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-2 tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
           Cadet Training
         </h2>
+        <p className="text-center text-sm text-yellow-100/70 mb-16 uppercase tracking-wider font-semibold" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+          Academic Background & University Degrees
+        </p>
 
         <div className="space-y-8">
           {education.map((e, i) => (

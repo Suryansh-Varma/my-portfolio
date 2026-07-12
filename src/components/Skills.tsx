@@ -78,11 +78,14 @@ export default function Skills() {
   return (
     <section id="skills" className="relative py-24 bg-gradient-to-b from-bg-secondary via-background to-background text-foreground overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 text-center z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 mb-4 tracking-widest">
+        <h2 className="h-pirate text-5xl text-yellow-300 mb-2 tracking-widest">
           Devil Fruits of My Powers
         </h2>
-        <p className="text-[#e6ddc8] mb-16 text-sm font-semibold tracking-wide" style={{ fontFamily: "var(--font-cinzel), serif" }}>
-          Click a Devil Fruit to inspect its combat lore and tech affinity.
+        <p className="text-yellow-100/70 mb-2 text-sm font-semibold uppercase tracking-wider" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+          Technical Skills & Software Expertise
+        </p>
+        <p className="text-[#e6ddc8]/80 mb-16 text-xs italic font-medium tracking-wide">
+          (Click a Devil Fruit below to inspect its combat lore and tech affinity)
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-16">

@@ -53,10 +53,13 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 bg-background relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-4 tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-2 tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
           Message in a Bottle
         </h2>
-        <p className="text-[#e6ddc8] text-center mb-16 text-sm font-semibold tracking-wide" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+        <p className="text-yellow-100/70 text-center mb-2 text-sm font-semibold uppercase tracking-wider" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+          Get in Touch & Coordination Port
+        </p>
+        <p className="text-[#e6ddc8]/80 text-center mb-16 text-xs italic font-medium tracking-wide">
           Drop your message or call the ship to connect.
         </p>
 

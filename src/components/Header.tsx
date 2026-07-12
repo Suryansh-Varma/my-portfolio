@@ -9,6 +9,7 @@ const navItems = [
   { name: "About Sailor", href: "#about" },
   { name: "Devil Fruits", href: "#skills" },
   { name: "Treasure Missions", href: "#projects" },
+  { name: "Credentials", href: "#certifications" },
   { name: "Cadet Training", href: "#education" },
   { name: "Contact", href: "#contact" },
 ];

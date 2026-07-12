@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
+import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
 import WaveDivider from "@/components/WaveDivider";
 import LogPoseButton from "@/components/LogPoseButton";
@@ -40,6 +41,9 @@ export default function Home() {
           <Education />
           <WaveDivider position="bottom" waveColor="var(--background)" />
         </div>
+
+        {/* Certifications Section */}
+        <Certifications />
 
         {/* Contact Section */}
         <Contact />
