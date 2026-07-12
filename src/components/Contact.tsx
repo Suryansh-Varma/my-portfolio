@@ -8,6 +8,7 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,6 +39,7 @@ export default function Contact() {
       if (response.ok && data.success) {
         setSuccess("Your message in a bottle has reached the shore safely!");
         setFormData({ name: "", email: "", message: "" });
+        setShowSuccessAnimation(true); // Open the animation overlay
       } else {
         setError(data.error || "A sudden sea storm swept your bottle away. Try again!");
       }
@@ -143,7 +145,7 @@ export default function Contact() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white rounded-md font-bold shadow-lg hover:scale-[1.02] transition active:scale-95 disabled:bg-slate-700 disabled:cursor-not-allowed select-none text-sm tracking-wide uppercase"
+            className="w-full py-3 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white rounded-md font-bold shadow-lg hover:scale-[1.02] transition active:scale-95 disabled:bg-slate-700 disabled:cursor-not-allowed select-none text-sm tracking-wide uppercase cursor-pointer"
           >
             {loading ? "Sailing your bottle... ⚓" : "Cast Bottle To Sea"}
           </button>
@@ -183,6 +185,96 @@ export default function Contact() {
           </motion.a>
         </div>
       </div>
+
+      {/* Success Animation Overlay */}
+      <AnimatePresence>
+        {showSuccessAnimation && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/85 backdrop-blur-md"
+            onClick={() => setShowSuccessAnimation(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, rotateY: 90, opacity: 0 }}
+              animate={{ scale: 1, rotateY: 0, opacity: 1 }}
+              exit={{ scale: 0.8, rotateY: -90, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-sm p-8 rounded-xl bg-gradient-to-b from-[#091530] to-[#020617] border-4 border-yellow-500 shadow-2xl text-center overflow-hidden"
+            >
+              {/* Sparkle caustics background */}
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.4)_0%,transparent_70%)] pointer-events-none" />
+
+              {/* Sailing Bottle Animation */}
+              <div className="relative h-28 flex items-center justify-center mb-6 overflow-hidden">
+                <motion.div
+                  initial={{ x: -200, y: 10, rotate: -20 }}
+                  animate={{ 
+                    x: [ -200, 0, 200 ], 
+                    y: [ 10, -10, 10 ],
+                    rotate: [ -20, 10, 20 ]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    times: [0, 0.5, 1],
+                    ease: "easeInOut"
+                  }}
+                  className="absolute opacity-80"
+                >
+                  <svg viewBox="0 0 100 100" fill="none" className="w-16 h-16">
+                    <path d="M40 20 L60 20 L60 30 L65 35 L65 80 C65 85 35 85 35 80 L35 35 L40 30 Z" stroke="#38bdf8" strokeWidth="3" fill="rgba(56,189,248,0.15)" />
+                    <path d="M43 12 L57 12 L57 20 L43 20 Z" fill="#b85a00" />
+                    <rect x="42" y="45" width="16" height="25" rx="2" fill="#ecdcb9" stroke="#5b3d1b" strokeWidth="1" transform="rotate(15 50 55)" />
+                    <path d="M35 70 C40 68 45 72 50 70 C55 68 60 72 65 70 L65 80 C65 82 35 82 35 80 Z" fill="rgba(56,189,248,0.3)" />
+                  </svg>
+                </motion.div>
+
+                {/* Golden Coin Pop */}
+                <motion.div
+                  initial={{ scale: 0, rotateY: 180, opacity: 0 }}
+                  animate={{ scale: 1, rotateY: 0, opacity: 1 }}
+                  transition={{ delay: 1.6, type: "spring", stiffness: 300, damping: 15 }}
+                  className="w-20 h-20 bg-yellow-500 rounded-full border-4 border-yellow-300 shadow-[0_0_20px_rgba(234,179,8,0.6)] flex items-center justify-center relative"
+                >
+                  <svg viewBox="0 0 100 100" className="w-12 h-12 fill-[#78350f]">
+                    <path d="M10 70 C20 62 80 62 90 70 C95 72 95 76 90 76 C80 76 20 76 10 76 C5 76 5 72 10 70 Z" />
+                    <path d="M28 69 C28 35 72 35 72 69 Z" />
+                  </svg>
+                </motion.div>
+              </div>
+
+              {/* Title & text */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.9 }}
+              >
+                <h3 className="h-pirate text-3xl text-yellow-300 tracking-wider mb-2">
+                  Message Cast!
+                </h3>
+                <p className="text-[#e6ddc8] text-xs font-semibold uppercase tracking-widest mb-4">
+                  Destination: The Grand Line
+                </p>
+                <p 
+                  className="text-slate-300 text-sm leading-relaxed mb-6"
+                  style={{ fontFamily: "var(--font-cinzel), serif" }}
+                >
+                  "Your bottle has been cast into the sea, riding the ocean tides safely to the captain's desk. Prepare for a response!"
+                </p>
+                
+                <button
+                  onClick={() => setShowSuccessAnimation(false)}
+                  className="px-6 py-2 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white font-bold rounded shadow transition-all duration-200 text-xs tracking-widest uppercase hover:scale-105 cursor-pointer"
+                >
+                  Acknowledge Log
+                </button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

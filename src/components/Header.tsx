@@ -128,14 +128,6 @@ export default function Header() {
             >
               <FaLinkedin />
             </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-1.5 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white font-semibold rounded-full text-xs shadow-md transition hover:scale-105"
-            >
-              <FaFilePdf /> View Resume
-            </a>
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -221,15 +213,6 @@ export default function Header() {
                   )}
                 </button>
                 <DenDenMushi />
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white font-semibold rounded-md text-sm shadow-md transition"
-                >
-                  <FaFilePdf /> View Resume
-                </a>
               </div>
             </div>
           </motion.div>

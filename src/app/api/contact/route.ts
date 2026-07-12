@@ -51,11 +51,35 @@ export async function POST(request: Request) {
       subject: `New Message from Portfolio - ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
-        <h3>New Contact Message</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p style="white-space: pre-wrap; padding: 10px; background-color: #f3f4f6; border-radius: 4px;">${message}</p>
+        <div style="background-color: #020617; padding: 30px; font-family: 'Georgia', serif; text-align: center;">
+          <div style="max-width: 500px; margin: 0 auto; background-color: #fdf5e6; border: 8px solid #5b3d1b; border-radius: 8px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: left; position: relative;">
+            
+            <!-- Wanted Poster Header -->
+            <div style="text-align: center; border-bottom: 3px double #5b3d1b; padding-bottom: 15px; margin-bottom: 20px;">
+              <span style="font-size: 10px; font-weight: bold; color: #b85a00; letter-spacing: 4px; text-transform: uppercase;">Log Entry</span>
+              <h2 style="margin: 5px 0; color: #5b3d1b; font-size: 26px; text-transform: uppercase; letter-spacing: 2px;">WANTED CONTACT</h2>
+              <div style="font-size: 12px; color: #78350f; font-style: italic; margin-top: 5px;">"A new sailor approaches the ship..."</div>
+            </div>
+
+            <!-- Content -->
+            <div style="color: #2c1b0c; font-size: 15px; line-height: 1.6;">
+              <p style="margin: 10px 0;"><strong>SAILOR NAME:</strong> <span style="color: #c77b00; font-weight: bold;">${name}</span></p>
+              <p style="margin: 10px 0;"><strong>COMMUNICATION DEN-DEN:</strong> <a href="mailto:${email}" style="color: #c77b00; text-decoration: underline; font-weight: bold;">${email}</a></p>
+              
+              <div style="margin-top: 25px; border-top: 1px dashed #5b3d1b; padding-top: 15px;">
+                <strong style="display: block; margin-bottom: 8px; color: #5b3d1b; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Message Bottle Content:</strong>
+                <div style="background-color: #f5ecd5; border-left: 4px solid #5b3d1b; padding: 15px; border-radius: 4px; white-space: pre-wrap; font-style: italic; color: #1e1208; font-size: 14px;">
+                  "${message}"
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="text-align: center; margin-top: 30px; border-top: 3px double #5b3d1b; padding-top: 15px; font-size: 11px; color: #78350f;">
+              ⚓ Sent from your grand portfolio bounty board ⚓
+            </div>
+          </div>
+        </div>
       `,
     };
 
