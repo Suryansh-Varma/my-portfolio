@@ -28,16 +28,16 @@ export const metadata: Metadata = {
   title: "Suryansh K Varma | Portfolio",
   description: "CS & Business Systems cadet sailing the seas of full-stack development and product strategy.",
   openGraph: {
-    title: "Suryansh D Varma | Portfolio",
+    title: "Suryansh K Varma | Portfolio",
     description: "CS & Business Systems cadet sailing the seas of full-stack development and product strategy.",
     url: "https://github.com/Suryansh-Varma",
-    siteName: "Suryansh D Varma Portfolio",
+    siteName: "Suryansh K Varma Portfolio",
     images: [
       {
         url: "/devilfruits/ship.png",
         width: 800,
         height: 800,
-        alt: "Suryansh D Varma Pirate Ship",
+        alt: "Suryansh K Varma Pirate Ship",
       },
     ],
     locale: "en_US",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Suryansh D Varma | Portfolio",
+    title: "Suryansh K Varma | Portfolio",
     description: "CS & Business Systems cadet sailing the seas of full-stack development and product strategy.",
     images: ["/devilfruits/ship.png"],
   },
