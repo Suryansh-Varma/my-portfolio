@@ -25,7 +25,7 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://github.com/Suryansh-Varma"),
-  title: "Suryansh D Varma | Portfolio",
+  title: "Suryansh K Varma | Portfolio",
   description: "CS & Business Systems cadet sailing the seas of full-stack development and product strategy.",
   openGraph: {
     title: "Suryansh D Varma | Portfolio",
