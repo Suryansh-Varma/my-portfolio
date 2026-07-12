@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaInstagram, FaGithub, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -52,54 +52,160 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 bg-background relative overflow-hidden">
-      <div className="max-w-xl mx-auto px-6 text-center z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 mb-4 tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+      <div className="max-w-4xl mx-auto px-6 z-10 relative">
+        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-4 tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
           Message in a Bottle
         </h2>
-        <p className="text-[#e6ddc8] mb-10 text-sm font-semibold tracking-wide" style={{ fontFamily: "var(--font-cinzel), serif" }}>
-          Drop your message and I’ll set sail to respond.
+        <p className="text-[#e6ddc8] text-center mb-16 text-sm font-semibold tracking-wide" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+          Drop your message or call the ship to connect.
         </p>
 
-        {/* Contact form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          className="space-y-5 text-left bg-[#081229]/40 backdrop-blur-md p-8 rounded-xl border border-[#c77b00]/20 shadow-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div>
-            <label className="block text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-2">
-              Sailor Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full p-3 rounded-md bg-[#020617] border border-[#c77b00]/20 focus:border-[#c77b00] text-white placeholder-slate-500 outline-none text-sm transition"
-              placeholder="E.g. Monkey D. Luffy"
-              required
-            />
-          </div>
+        {/* 2-Column Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
+          
+          {/* Column 1: Contact Coordinates (2/5 span) */}
+          <motion.div
+            className="md:col-span-2 space-y-6 bg-[#081229]/40 backdrop-blur-md p-8 rounded-xl border border-[#c77b00]/20 shadow-2xl h-full flex flex-col justify-between"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div>
+              <h3 className="h-pirate text-2xl text-yellow-300 mb-6 tracking-wider border-b border-[#c77b00]/20 pb-3">
+                Logbook Coordinates
+              </h3>
 
-          <div>
-            <label className="block text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-2">
-              Return Den Den Mushi (Email)
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full p-3 rounded-md bg-[#020617] border border-[#c77b00]/20 focus:border-[#c77b00] text-white placeholder-slate-500 outline-none text-sm transition"
-              placeholder="luffy@strawhats.org"
-              required
-            />
-          </div>
+              <div className="space-y-6 text-left">
+                {/* Email Address */}
+                <div className="flex gap-4 items-start">
+                  <div className="text-yellow-400 mt-1 text-lg">
+                    <FaEnvelope />
+                  </div>
+                  <div>
+                    <h4 className="text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-1">
+                      Email
+                    </h4>
+                    <a 
+                      href="mailto:suryansh.varma17@gmail.com"
+                      className="text-sm font-semibold text-slate-300 hover:text-yellow-300 transition-colors break-all"
+                    >
+                      suryansh.varma17@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                {/* Mobile/Phone Number */}
+                <div className="flex gap-4 items-start">
+                  <div className="text-yellow-400 mt-1 text-lg">
+                    <FaPhoneAlt />
+                  </div>
+                  <div>
+                    <h4 className="text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-1">
+                      Call Transceiver (Mobile)
+                    </h4>
+                    <a 
+                      href="tel:+919959172369" 
+                      className="text-sm font-semibold text-slate-300 hover:text-yellow-300 transition-colors"
+                      title="Click to Call"
+                    >
+                      +91 99591 72369
+                    </a>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex gap-4 items-start">
+                  <div className="text-yellow-400 mt-1 text-lg">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div>
+                    <h4 className="text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-1">
+                      Home Port (Location)
+                    </h4>
+                    <p className="text-sm font-semibold text-slate-300">
+                      Visakhapatnam, India
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Social links embedded inside card */}
+            <div className="pt-8 border-t border-[#c77b00]/10 flex gap-6 justify-start mt-8">
+              <motion.a
+                href="https://github.com/Suryansh-Varma"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15 }}
+                className="text-[#e6ddc8] text-2xl hover:text-white transition"
+                title="GitHub"
+              >
+                <FaGithub />
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/in/kakarlapudi-suryansh-varma-7941652b3/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15 }}
+                className="text-[#e6ddc8] text-2xl hover:text-[#0a66c2] transition"
+                title="LinkedIn"
+              >
+                <FaLinkedin />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/_suryansh_varma_17/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.15 }}
+                className="text-[#e6ddc8] text-2xl hover:text-pink-500 transition"
+                title="Instagram"
+              >
+                <FaInstagram />
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Column 2: Message Form (3/5 span) */}
+          <motion.form
+            onSubmit={handleSubmit}
+            className="md:col-span-3 space-y-5 text-left bg-[#081229]/40 backdrop-blur-md p-8 rounded-xl border border-[#c77b00]/20 shadow-2xl"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div>
+              <label className="block text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-2">
+                Sailor Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full p-3 rounded-md bg-[#020617] border border-[#c77b00]/20 focus:border-[#c77b00] text-white placeholder-slate-500 outline-none text-sm transition"
+                placeholder="E.g. Monkey D. Luffy"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-2">
+                Return Den Den Mushi (Email)
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full p-3 rounded-md bg-[#020617] border border-[#c77b00]/20 focus:border-[#c77b00] text-white placeholder-slate-500 outline-none text-sm transition"
+                placeholder="luffy@strawhats.org"
+                required
+              />
+            </div>
 
           <div>
             <label className="block text-[#e6ddc8] text-xs font-bold tracking-widest uppercase mb-2">
@@ -150,40 +256,6 @@ export default function Contact() {
             {loading ? "Sailing your bottle... ⚓" : "Cast Bottle To Sea"}
           </button>
         </motion.form>
-
-        {/* Social links */}
-        <div className="mt-12 flex justify-center gap-8">
-          <motion.a
-            href="https://github.com/Suryansh-Varma"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.15 }}
-            className="text-[#e6ddc8] text-3xl hover:text-white transition"
-            title="GitHub"
-          >
-            <FaGithub />
-          </motion.a>
-          <motion.a
-            href="https://www.linkedin.com/in/kakarlapudi-suryansh-varma-7941652b3/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.15 }}
-            className="text-[#e6ddc8] text-3xl hover:text-[#0a66c2] transition"
-            title="LinkedIn"
-          >
-            <FaLinkedin />
-          </motion.a>
-          <motion.a
-            href="https://www.instagram.com/_suryansh_varma_17/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.15 }}
-            className="text-[#e6ddc8] text-3xl hover:text-pink-500 transition"
-            title="Instagram"
-          >
-            <FaInstagram />
-          </motion.a>
-        </div>
       </div>
 
       {/* Success Animation Overlay */}
@@ -275,6 +347,7 @@ export default function Contact() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </section>
   );
 }

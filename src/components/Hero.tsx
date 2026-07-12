@@ -50,7 +50,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="h-pirate text-5xl md:text-7xl text-yellow-300 drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]"
         >
-          SURYANSH D VARMA
+          SURYANSH K VARMA
         </motion.h1>
 
         {/* Tagline */}

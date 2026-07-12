@@ -106,7 +106,7 @@ export default function About() {
             className="h-pirate text-3xl md:text-4xl text-[#5b3d1b] tracking-wide select-none font-bold mb-2"
             style={{ transform: "translateZ(45px)" }}
           >
-            SURYANSH D VARMA
+            SURYANSH K VARMA
           </h2>
 
           {/* Description */}
