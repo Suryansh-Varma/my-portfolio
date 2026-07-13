@@ -39,16 +39,16 @@ export default function Hero() {
       <img
         src="/devilfruits/ship.png"
         alt="ship"
-        className="absolute left-8 top-20 w-28 opacity-90 rounded-full float-anim z-20 pointer-events-none"
+        className="absolute left-4 md:left-8 top-24 w-16 md:w-28 opacity-90 rounded-full float-anim z-20 pointer-events-none hidden sm:block"
       />
 
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6">
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 pt-20 md:pt-0">
         {/* Name */}
         <motion.h1
           initial={{ y: -40, opacity: 0, scale: 0.98 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="h-pirate text-5xl md:text-7xl text-yellow-300 drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)]"
+          className="h-pirate text-3xl sm:text-5xl md:text-7xl text-yellow-300 drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)] leading-tight"
         >
           SURYANSH K VARMA
         </motion.h1>
