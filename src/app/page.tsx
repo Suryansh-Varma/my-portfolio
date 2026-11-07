@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
 import ParticleBackground from "@/components/ParticleBackground";
+import CinematicCursor from "@/components/CinematicCursor";
+import CinematicScrollProvider from "@/components/CinematicScrollProvider";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
@@ -14,40 +16,45 @@ import ZoroSlashEffect from "@/components/ZoroSlashEffect";
 export default function Home() {
   return (
     <>
+      <CinematicCursor />
       <Header />
       <ParticleBackground />
       <ZoroSlashEffect />
-      <main className="relative min-h-screen bg-background">
-        {/* Hero Section */}
-        <div className="relative">
-          <Hero />
-          <WaveDivider position="bottom" waveColor="var(--background-secondary)" />
-        </div>
 
-        {/* About Section */}
-        <About />
+      <CinematicScrollProvider>
+        <main className="relative min-h-screen bg-[var(--background)]">
+          {/* Hero Section */}
+          <div className="relative">
+            <Hero />
+            <WaveDivider position="bottom" waveColor="var(--background-secondary)" />
+          </div>
 
-        {/* Skills Section */}
-        <Skills />
+          {/* About Section */}
+          <About />
 
-        {/* Projects Section */}
-        <div className="relative">
-          <WaveDivider position="top" waveColor="var(--background-secondary)" />
-          <Projects />
-        </div>
+          {/* Skills Section */}
+          <Skills />
 
-        {/* Education Section */}
-        <div className="relative">
-          <Education />
-          <WaveDivider position="bottom" waveColor="var(--background)" />
-        </div>
+          {/* Projects Section */}
+          <div className="relative">
+            <WaveDivider position="top" waveColor="var(--background-secondary)" />
+            <Projects />
+          </div>
 
-        {/* Certifications Section */}
-        <Certifications />
+          {/* Education Section */}
+          <div className="relative">
+            <Education />
+            <WaveDivider position="bottom" waveColor="var(--background-secondary)" />
+          </div>
 
-        {/* Contact Section */}
-        <Contact />
-      </main>
+          {/* Certifications Section */}
+          <Certifications />
+
+          {/* Contact Section */}
+          <Contact />
+        </main>
+      </CinematicScrollProvider>
+
       <LogPoseButton />
     </>
   );

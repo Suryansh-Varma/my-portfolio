@@ -1,111 +1,196 @@
 "use client";
-import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram, FaFilePdf } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { FaLinkedin, FaGithub, FaInstagram, FaFilePdf, FaCompass } from "react-icons/fa";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<SVGTextElement>(null);
+  const taglineRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLHeadingElement>(null);
+  const shipRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      // 1. Initial state setup
+      if (textRef.current) {
+        gsap.set(textRef.current, {
+          strokeDasharray: 2000,
+          strokeDashoffset: 2000,
+          fillOpacity: 0,
+          stroke: "#e8b84b",
+          strokeWidth: 1.5,
+        });
+      }
+
+      // 2. Ink-stroke calligraphy draw animation
+      tl.to(textRef.current, {
+        strokeDashoffset: 0,
+        duration: 1.5,
+        ease: "power2.inOut",
+        delay: 0.2,
+      })
+      .to(
+        textRef.current,
+        {
+          fillOpacity: 1,
+          duration: 0.5,
+          ease: "power1.out",
+        },
+        "-=0.3"
+      )
+      // 3. Elements fade up with confident precision
+      .fromTo(
+        taglineRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.7 },
+        "-=0.2"
+      )
+      .fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        "-=0.3"
+      )
+      .fromTo(
+        socialsRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.3"
+      )
+      .fromTo(
+        quoteRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8 },
+        "-=0.2"
+      )
+      .fromTo(
+        shipRef.current,
+        { opacity: 0, x: -30 },
+        { opacity: 0.95, x: 0, duration: 1.2, ease: "power2.out" },
+        0.5
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative h-screen overflow-hidden">
-      {/* Video background with CSS filters to mask low-res artifacts */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: "blur(1.5px) contrast(1.15) brightness(0.75)" }}
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/devilfruits/bg1.mp4" type="video/mp4" />
-      </video>
-
-      {/* Styled Grid / Scanline Noise Overlay to cover low-resolution quality */}
-      <div 
-        className="absolute inset-0 z-10 pointer-events-none opacity-[0.08]" 
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.45) 50%),
-            linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))
-          `,
-          backgroundSize: "100% 4px, 6px 100%"
-        }}
-      />
-
-      {/* Dark overlay with dynamic marine gradient for extra depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/35 to-[#020617] mix-blend-multiply z-10" />
-
-      {/* Visually spectacular glowing light ray / marine caustic overlay */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none z-10 mix-blend-color-dodge bg-[radial-gradient(ellipse_at_top,rgba(234,179,8,0.2)_0%,transparent_60%)]" />
-
-      {/* Decorative ship */}
-      <img
-        src="/devilfruits/ship.png"
-        alt="ship"
-        className="absolute left-4 md:left-8 top-24 w-16 md:w-28 opacity-90 rounded-full float-anim z-20 pointer-events-none hidden sm:block"
-      />
-
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 pt-20 md:pt-0">
-        {/* Name */}
-        <motion.h1
-          initial={{ y: -40, opacity: 0, scale: 0.98 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="h-pirate text-3xl sm:text-5xl md:text-7xl text-yellow-300 drop-shadow-[0_8px_30px_rgba(0,0,0,0.8)] leading-tight"
+    <section
+      ref={containerRef}
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-16"
+    >
+      {/* Background Video with Clean Studio Grade */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          className="w-full h-full object-cover scale-105"
+          style={{ filter: "brightness(0.55) contrast(1.15) saturate(0.9)" }}
+          autoPlay
+          loop
+          muted
+          playsInline
         >
-          SURYANSH K VARMA
-        </motion.h1>
+          <source src="/devilfruits/bg1.mp4" type="video/mp4" />
+        </video>
+        {/* Subtle, non-cloudy vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#010510]/80 via-[#010510]/40 to-[#010510]" />
+      </div>
+
+      {/* Decorative Thousand Sunny / Ship */}
+      <img
+        ref={shipRef}
+        src="/devilfruits/ship.png"
+        alt="Ship of the Strawhats"
+        className="absolute left-6 md:left-12 top-28 w-16 md:w-28 opacity-0 float-anim z-10 pointer-events-none hidden sm:block select-none"
+      />
+
+      {/* Hero Content Area */}
+      <div className="relative z-10 w-full max-w-5xl flex flex-col items-center text-center mx-auto">
+        {/* Top Arc Tag */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[var(--border-subtle)] bg-[#040d20]/70 backdrop-blur-sm mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#e8b84b]" />
+          <span className="cinema-subtitle text-[10px] md:text-xs text-[#e8b84b] tracking-[0.25em]">
+            Grand Line Engineering Portfolio
+          </span>
+        </div>
+
+        {/* Ink-Stroke Animated Name (SVG for infinite 16K vector precision) */}
+        <div className="w-full max-w-4xl h-24 sm:h-32 md:h-44 flex items-center justify-center">
+          <svg
+            viewBox="0 0 1000 160"
+            className="w-full h-full overflow-visible"
+            aria-label="Suryansh K Varma"
+          >
+            <text
+              ref={textRef}
+              x="50%"
+              y="68%"
+              textAnchor="middle"
+              className="h-pirate"
+              style={{
+                fontFamily: "var(--font-pirata-one), cursive",
+                fontSize: "115px",
+                letterSpacing: "0.06em",
+                fill: "#f0ead6",
+              }}
+            >
+              SURYANSH K VARMA
+            </text>
+          </svg>
+        </div>
 
         {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-4 text-lg md:text-xl text-[#e6ddc8] max-w-2xl font-medium tracking-wide"
+        <p
+          ref={taglineRef}
+          className="mt-2 text-base sm:text-lg md:text-xl text-[#d0c6b0] max-w-2xl font-normal leading-relaxed opacity-0"
+          style={{ fontFamily: "var(--font-cinzel), serif" }}
         >
-          Ahoy! A CS & Business Systems cadet sailing the seas of full-stack
-          development and product strategy.
-        </motion.p>
+          Computer Science & Business Systems cadet architecting resilient
+          full-stack applications, scalable cloud microservices, and product strategy.
+        </p>
 
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
-          className="mt-8 flex flex-col sm:flex-row gap-4"
+        {/* Action Buttons */}
+        <div
+          ref={ctaRef}
+          className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center opacity-0 w-full max-w-md"
         >
           <a
             href="#projects"
-            className="px-6 py-3 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white rounded-md font-semibold shadow-[0_0_15px_rgba(199,123,0,0.4)] hover:shadow-[0_0_25px_rgba(199,123,0,0.8)] hover:scale-105 transition flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-7 py-3 rounded bg-[var(--gold-primary)] hover:bg-[var(--gold-light)] text-[#010510] font-semibold text-sm tracking-wider uppercase transition-colors duration-200 shadow-sm flex items-center justify-center gap-2"
           >
-            View Missions
+            <FaCompass className="text-base" /> View Missions
           </a>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-slate-900 rounded-md font-bold shadow-[0_0_15px_rgba(234,179,8,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.8)] hover:scale-105 transition flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-7 py-3 rounded border border-[var(--border-strong)] bg-[#040d20]/80 hover:bg-[#081738] text-[#f0ead6] font-semibold text-sm tracking-wider uppercase transition-colors duration-200 flex items-center justify-center gap-2"
           >
-            <FaFilePdf /> View Resume
+            <FaFilePdf className="text-sm text-[#e8b84b]" /> Resume
           </a>
           <a
             href="#contact"
-            className="text-white px-6 py-3 border border-[#c77b00]/50 hover:bg-[#c77b00]/20 rounded-md font-semibold shadow-[0_0_10px_rgba(199,123,0,0.1)] hover:shadow-[0_0_20px_rgba(199,123,0,0.5)] hover:scale-105 transition flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-3 rounded text-xs tracking-wider uppercase text-[#c8922a] hover:text-[#e8b84b] hover:bg-[#040d20]/60 transition-colors flex items-center justify-center"
           >
-            Send Message in Bottle
+            Contact Shore
           </a>
-        </motion.div>
+        </div>
 
-        {/* Social Icons in Hero */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="mt-8 flex gap-6 text-3xl"
+        {/* Social Links */}
+        <div
+          ref={socialsRef}
+          className="mt-8 flex items-center gap-6 text-xl text-[#9a8f7a] opacity-0"
         >
           <a
             href="https://github.com/Suryansh-Varma"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#e6ddc8] hover:text-yellow-400 transition hover:scale-115"
-            title="GitHub"
+            className="hover:text-[#f0ead6] transition-colors"
+            title="GitHub Profile"
           >
             <FaGithub />
           </a>
@@ -113,8 +198,8 @@ export default function Hero() {
             href="https://www.linkedin.com/in/kakarlapudi-suryansh-varma-7941652b3/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#e6ddc8] hover:text-[#0a66c2] transition hover:scale-115"
-            title="LinkedIn"
+            className="hover:text-[#0a66c2] transition-colors"
+            title="LinkedIn Profile"
           >
             <FaLinkedin />
           </a>
@@ -122,19 +207,20 @@ export default function Hero() {
             href="https://www.instagram.com/_suryansh_varma_17/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#e6ddc8] hover:text-pink-500 transition hover:scale-115"
-            title="Instagram"
+            className="hover:text-[#e1306c] transition-colors"
+            title="Instagram Profile"
           >
             <FaInstagram />
           </a>
-        </motion.div>
+        </div>
 
-        {/* Quote */}
+        {/* One Piece Luffy Quote */}
         <h2
-          className="mt-12 text-2xl md:text-3xl text-yellow-400 drop-shadow-[0_5px_5px_rgba(0,0,0,0.9)] tracking-widest max-w-3xl leading-relaxed"
-          style={{ fontFamily: "'Rampart One', cursive" }}
+          ref={quoteRef}
+          className="mt-14 text-sm sm:text-base md:text-lg text-[#9a8f7a] tracking-[0.2em] uppercase font-medium opacity-0"
+          style={{ fontFamily: "var(--font-cinzel), serif" }}
         >
-          "If you don’t take risks, you can’t create a future!"
+          &ldquo;If you don't take risks, you can't create a future!&rdquo;
         </h2>
       </div>
     </section>

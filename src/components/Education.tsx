@@ -1,59 +1,83 @@
 "use client";
 import { motion } from "framer-motion";
+import { FaGraduationCap } from "react-icons/fa";
 
 const education = [
   {
-    school: "VIT AP University",
-    degree: "B.Tech CSE (Business Systems)",
+    school: "VIT-AP University",
+    degree: "B.Tech in Computer Science & Engineering (Business Systems)",
     years: "2023 - 2027",
+    details: "Focusing on enterprise software engineering, business process management, data structures, and cloud computing architectures.",
+    status: "Active Cadet (Undergraduate)",
   },
   {
     school: "RGUKT R.K. Valley",
-    degree: "PUC (MPC)",
+    degree: "Pre-University Course (MPC)",
     years: "2021 - 2023",
+    details: "Foundational coursework in advanced mathematics, physics, computing principles, and competitive analytical problem-solving.",
+    status: "Completed with Distinction",
   },
   {
     school: "Sri Chaitanya EM High School",
-    degree: "High School",
+    degree: "Secondary School Certificate",
     years: "2009 - 2021",
+    details: "Strong academic foundation in science and mathematics with early induction into programming concepts.",
+    status: "Completed",
   },
 ];
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 bg-bg-secondary relative overflow-hidden">
+    <section id="education" className="py-28 bg-[var(--background)] relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-2 tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
-          Cadet Training
-        </h2>
-        <p className="text-center text-sm text-yellow-100/70 mb-16 uppercase tracking-wider font-semibold" style={{ fontFamily: "var(--font-cinzel), serif" }}>
-          Academic Background & University Degrees
-        </p>
+        
+        {/* Section Heading */}
+        <div className="text-center mb-16 cinema-header-reveal">
+          <h2 className="cinema-title">Cadet Training</h2>
+          <p className="cinema-subtitle mt-2">
+            Academic Background & Theoretical Foundations
+          </p>
+        </div>
 
-        <div className="space-y-8">
-          {education.map((e, i) => (
-            <motion.div
-              key={e.school}
-              initial={{ x: i % 2 === 0 ? -50 : 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="relative p-6 rounded-xl bg-[#fdf5e6] border-4 border-[#5b3d1b] shadow-2xl transition duration-300"
-            >
-              {/* Parchment Overlay */}
-              <div className="absolute inset-0 bg-[url('/textures/parchment.png')] opacity-15 mix-blend-multiply rounded-lg pointer-events-none" />
+        {/* Studio-Grade Clean Timeline */}
+        <div className="relative pl-6 sm:pl-8 border-l border-[var(--border-subtle)] space-y-10">
+          {education.map((e) => (
+            <div key={e.school} className="relative group cinema-fade-up">
+              
+              {/* Timeline Node Point */}
+              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#010510] border-2 border-[var(--gold-primary)] group-hover:scale-125 transition-transform duration-200" />
 
-              <h3 
-                className="relative text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)]" 
-                style={{ fontFamily: "var(--font-cinzel), serif" }}
-              >
-                {e.school}
-              </h3>
-              <p className="relative mt-2 text-[#402b18] font-bold text-sm italic">
-                {e.degree} • <span className="text-[#b85a00]">{e.years}</span>
-              </p>
-            </motion.div>
+              {/* Academic Card */}
+              <div className="p-6 sm:p-7 rounded-lg bg-[#040d20] border border-[var(--border-subtle)] group-hover:border-[var(--border-strong)] shadow-md transition-colors duration-200 text-left">
+                
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-3 mb-3">
+                  <div className="flex items-center gap-2">
+                    <FaGraduationCap className="text-[var(--gold-primary)] text-base" />
+                    <h3
+                      className="text-xl font-bold text-[#f0ead6]"
+                      style={{ fontFamily: "var(--font-cinzel), serif" }}
+                    >
+                      {e.school}
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-mono tracking-widest text-[var(--gold-light)] uppercase">
+                    {e.years}
+                  </span>
+                </div>
+
+                <p className="text-sm font-semibold text-[#d0c6b0] mb-2">
+                  {e.degree}
+                </p>
+
+                <p className="text-xs sm:text-[13px] text-[#9a8f7a] leading-relaxed mb-3">
+                  {e.details}
+                </p>
+
+                <span className="inline-block text-[10px] font-mono uppercase tracking-widest text-[#9a8f7a] border border-[var(--border-subtle)] px-2.5 py-0.5 rounded bg-[#010510]">
+                  {e.status}
+                </span>
+              </div>
+            </div>
           ))}
         </div>
       </div>

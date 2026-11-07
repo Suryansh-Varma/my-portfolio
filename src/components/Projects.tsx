@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaCompass, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaCompass } from "react-icons/fa";
 
 interface RepoLink {
   label: string;
@@ -8,6 +8,7 @@ interface RepoLink {
 }
 
 interface ProjectItem {
+  id: string;
   title: string;
   subtitle: string;
   desc: string;
@@ -21,24 +22,28 @@ interface ProjectItem {
 
 const projects: ProjectItem[] = [
   { 
+    id: "MISSION 01",
     title: "SheetFlow",
-    subtitle: "Real-time Collaborative Spreadsheet",
-    desc: "A real-time collaborative spreadsheet supporting live multi-user editing with presence indicators and <100ms cell sync latency.",
+    subtitle: "Real-Time Collaborative Spreadsheet",
+    desc: "A real-time collaborative spreadsheet engine supporting live multi-user editing with cursor presence indicators and <100ms cell sync latency.",
     tech: ["Next.js 14", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
     bullets: [
-      "Built a real-time collaborative spreadsheet supporting live multi-user editing with presence indicators and <100ms cell sync latency using Supabase Realtime channels."
+      "Built a real-time collaborative spreadsheet supporting live multi-user editing with presence indicators and <100ms cell sync latency using Supabase Realtime channels.",
+      "Engineered an in-memory formula parser supporting dynamic arithmetic evaluations, cell references, and multi-user undo/redo states."
     ],
     demo: "https://sheetflow-kappa.vercel.app/", 
     repo: "https://github.com/Suryansh-Varma/sheetflow",
     bounty: "850,000,000"
   },
   { 
-    title: "Neighborhood Carpool coordination",
+    id: "MISSION 02",
+    title: "Neighborhood Carpool",
     subtitle: "AWS Serverless Matching Service",
-    desc: "A full-stack carpool platform deploying matching logic on AWS Lambda and containerized services using Amazon ECR.",
+    desc: "A full-stack carpool platform deploying matching logic on AWS Lambda and containerized microservices using Amazon ECR.",
     tech: ["React", "Python (FastAPI)", "AWS Lambda", "Amazon ECR", "GitHub"],
     bullets: [
-      "Built a full-stack carpool coordination platform in a 4-person team, enabling users to create, join, and manage carpool groups by location and destination, using a React frontend and FastAPI backend."
+      "Built a full-stack carpool coordination platform in a 4-person team, enabling users to create, join, and manage carpool groups by location and destination.",
+      "Architected serverless dispatch functions on AWS Lambda with containerized microservices managed via Amazon ECR for rapid scaling."
     ],
     demo: "http://35.153.45.221/",
     repos: [
@@ -48,12 +53,14 @@ const projects: ProjectItem[] = [
     bounty: "950,000,000"
   },
   { 
-    title: "Smart Commerce(TechHeaven)",
-    subtitle: "Full-Stack Enterprise E-Commerce Platform",
-    desc: "A production-style full-stack e-commerce platform featuring JWT authentication, role-based authorization, and Swagger docs.",
-    tech: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Next.js", "React", "TypeScript", "Docker", "Swagger"],
+    id: "MISSION 03",
+    title: "Smart Commerce (TechHeaven)",
+    subtitle: "Enterprise E-Commerce Architecture",
+    desc: "A production-style full-stack e-commerce platform featuring JWT authentication, role-based authorization, and Swagger documentation.",
+    tech: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Next.js", "Docker"],
     bullets: [
-      "Engineered a production-style full-stack e-commerce platform featuring JWT authentication, role-based authorization, product management, shopping cart, checkout, and order processing using Spring Boot and PostgreSQL."
+      "Engineered an enterprise e-commerce platform featuring JWT authentication, role-based authorization, shopping cart, and order processing using Spring Boot and PostgreSQL.",
+      "Integrated automated API documentation via OpenAPI/Swagger and packaged backend services inside Docker containers for reproducible environments."
     ],
     demo: "https://techheaven.vercel.app/",
     repos: [
@@ -63,12 +70,15 @@ const projects: ProjectItem[] = [
     bounty: "750,000,000"
   },
   { 
+    id: "MISSION 04",
     title: "NiftySignal",
     subtitle: "NSE Market Predictor & Dashboard",
-    desc: "An ML-driven financial forecasting tool predicting short-term market trends using LSTM and ensemble models on NSE historical data.",
-    tech: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "NSE API"],
+    desc: "An ML-driven financial forecasting dashboard predicting short-term market trends using LSTM and ensemble models on NSE historical data.",
+    tech: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "FastAPI"],
     bullets: [
-      "Built an ML-driven financial forecasting tool on NSE historical data using LSTM and ensemble models to predict short-term market trends with ~72% directional accuracy on test data.",],
+      "Built an ML-driven financial forecasting tool on NSE historical data using LSTM and ensemble models to predict short-term market trends with ~72% directional accuracy.",
+      "Built an automated inference API and interactive charting dashboard for technical indicators and trade signal evaluations."
+    ],
     demo: "https://niftysignal.onrender.com/docs", 
     repo: "https://github.com/Suryansh-Varma/niftysignal",
     bounty: "650,000,000"
@@ -77,138 +87,111 @@ const projects: ProjectItem[] = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-bg-secondary relative overflow-hidden">
+    <section id="projects" className="py-28 bg-[var(--background-secondary)] relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 z-10 relative">
-        <h2 className="h-pirate text-5xl text-yellow-300 text-center mb-2 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] tracking-widest">
-          Treasure Missions
-        </h2>
-        <p className="text-center text-sm text-yellow-100/70 mb-16 uppercase tracking-wider font-semibold" style={{ fontFamily: "var(--font-cinzel), serif" }}>
-          Featured Engineering Projects & Technical Architecture
-        </p>
+        
+        {/* Section Heading */}
+        <div className="text-center mb-16 cinema-header-reveal">
+          <h2 className="cinema-title">Treasure Missions</h2>
+          <p className="cinema-subtitle mt-2">
+            Featured Engineering Projects & Technical Architecture
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((p, i) => (
+        {/* 2-Column Movie Poster Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((p) => (
             <motion.div
               key={p.title}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: i * 0.12 }}
-              whileHover={{ 
-                y: -10, 
-                boxShadow: "0 25px 50px -12px rgba(251, 191, 36, 0.2)"
-              }}
-              className="relative rounded-xl p-8 bg-[#fdf5e6] border-4 border-[#5b3d1b] flex flex-col justify-between min-h-[480px] overflow-hidden group shadow-xl"
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative rounded-lg p-7 sm:p-8 bg-[#040d20] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] flex flex-col justify-between shadow-xl transition-colors duration-200 group cinema-fade-up"
             >
-              {/* Parchment Overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-[url('/textures/parchment.png')] opacity-15 mix-blend-multiply rounded-lg" />
-
               <div>
-                {/* Header with spinning compass on hover */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[#5b3d1b] text-xs font-bold tracking-[0.2em] uppercase select-none">
-                    Mission {i + 1}
+                {/* Header: Mission Tag & Bounty */}
+                <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4 mb-5">
+                  <span className="text-[10px] font-mono tracking-widest uppercase text-[#9a8f7a] group-hover:text-[var(--gold-light)] transition-colors">
+                    {p.id}
                   </span>
-                  <motion.div 
-                    className="text-[#c77b00] text-xl"
-                    variants={{
-                      hover: { rotate: 360 }
-                    }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                  >
-                    <FaCompass className="group-hover:rotate-180 transition duration-700" />
-                  </motion.div>
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-[#9a8f7a]">
+                      Bounty:
+                    </span>
+                    <span className="h-pirate text-base text-[var(--gold-light)] font-bold tracking-wider">
+                      ฿ {p.bounty}-
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#5b3d1b] drop-shadow-[1px_1px_1px_rgba(0,0,0,0.2)]" style={{ fontFamily: "var(--font-cinzel), serif" }}>
+                {/* Title & Subtitle */}
+                <h3
+                  className="text-2xl font-bold text-[#f0ead6] group-hover:text-[var(--gold-light)] transition-colors duration-200"
+                  style={{ fontFamily: "var(--font-cinzel), serif" }}
+                >
                   {p.title}
                 </h3>
-                <h4 className="text-xs font-bold text-[#b85a00] uppercase tracking-wider mt-1 mb-3">
+                <h4 className="text-xs font-mono font-medium text-[var(--gold-primary)] uppercase tracking-wider mt-1 mb-4">
                   {p.subtitle}
                 </h4>
 
-                {/* Tech Stack badges */}
+                {/* Tech Stack Badges */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
                   {p.tech.map((t) => (
-                    <span 
+                    <span
                       key={t}
-                      className="px-2 py-0.5 bg-[#5b3d1b]/10 border border-[#5b3d1b]/25 rounded text-[10px] font-bold text-[#5b3d1b]"
+                      className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#010510] border border-[var(--border-subtle)] text-[#d0c6b0]"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                
-                {/* Bullet points */}
-                <ul className="mt-3 text-xs text-[#3c2a18] font-semibold leading-relaxed space-y-2 list-disc list-outside pl-4">
+
+                {/* Bullets */}
+                <ul className="text-xs sm:text-[13px] text-[#9a8f7a] leading-relaxed space-y-2.5 mb-6 text-left">
                   {p.bullets.map((b, idx) => (
-                    <li key={idx} className="marker:text-[#c77b00]">
-                      {b}
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-[var(--gold-primary)] mt-0.5 text-xs">▪</span>
+                      <span>{b}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div>
-                {/* Bounty at the bottom of card */}
-                <div className="mt-6 pt-3 border-t border-dashed border-[#5b3d1b]/40 flex flex-col items-center select-none">
-                  <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#5b3d1b]/60">Bounty</span>
-                  <span className="h-pirate text-lg text-[#b85a00] font-bold tracking-wider mt-0.5">
-                    ฿ {p.bounty}-
-                  </span>
-                </div>
+              {/* Action Buttons */}
+              <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row gap-2.5">
+                {p.demo && (
+                  <a
+                    href={p.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 px-3 rounded bg-[var(--gold-primary)] hover:bg-[var(--gold-light)] text-[#010510] text-xs font-semibold uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <FaExternalLinkAlt size={10} /> Live Deployment
+                  </a>
+                )}
 
-                {/* Stacked Button Layout */}
-                <div className="mt-4 flex flex-col gap-2 z-10 relative">
-                  {/* Demo Button */}
-                  {p.demo ? (
-                    <a 
-                      className="w-full py-2 px-3 bg-[#c77b00] hover:bg-[#c77b00]/80 text-white rounded-md text-xs font-bold text-center shadow flex items-center justify-center gap-1.5 transition-colors duration-200" 
-                      href={p.demo} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      <FaExternalLinkAlt size={10} /> Live Demo
-                    </a>
-                  ) : (
-                    <span className="w-full py-2 px-3 bg-slate-200 text-slate-500 rounded-md text-xs font-bold text-center cursor-not-allowed select-none block">
-                      No Live Demo
-                    </span>
-                  )}
+                {p.repo && (
+                  <a
+                    href={p.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 px-3 rounded border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[#010510] hover:bg-[#081738] text-[#f0ead6] text-xs font-semibold uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <FaGithub size={12} /> Source Code
+                  </a>
+                )}
 
-                  {/* Code Button Row */}
-                  <div className="flex gap-2">
-                    {p.repo && (
-                      <a 
-                        className="flex-1 py-2 px-3 border-2 border-[#5b3d1b] text-[#5b3d1b] hover:bg-[#5b3d1b]/10 rounded-md text-xs font-bold text-center flex items-center justify-center gap-1.5 transition-colors duration-200" 
-                        href={p.repo} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        <FaGithub size={12} /> Source Code
-                      </a>
-                    )}
-
-                    {p.repos && p.repos.map((r) => (
-                      <a 
-                        key={r.label}
-                        className="flex-1 py-2 px-1 border-2 border-[#5b3d1b] text-[#5b3d1b] hover:bg-[#5b3d1b]/10 rounded-md text-[10px] font-bold text-center flex items-center justify-center gap-1 transition-colors duration-200" 
-                        href={r.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        title={`${r.label} Repository`}
-                      >
-                        <FaGithub size={10} /> {r.label}
-                      </a>
-                    ))}
-
-                    {!p.repo && !p.repos && (
-                      <span className="flex-1 py-2 px-3 border-2 border-slate-200 text-slate-400 rounded-md text-xs font-bold text-center cursor-not-allowed select-none">
-                        Private Code
-                      </span>
-                    )}
-                  </div>
-                </div>
+                {p.repos && p.repos.map((r) => (
+                  <a
+                    key={r.label}
+                    href={r.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 px-3 rounded border border-[var(--border-subtle)] hover:border-[var(--border-strong)] bg-[#010510] hover:bg-[#081738] text-[#f0ead6] text-xs font-semibold uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <FaGithub size={12} /> {r.label}
+                  </a>
+                ))}
               </div>
             </motion.div>
           ))}
